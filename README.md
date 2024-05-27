@@ -55,7 +55,7 @@ theme 3
 ### Links
 
 - Solution URL: [On Github](https://github.com/escannord/calculator-app-main/)
-- Live Site URL: [Live Preview](https://your-live-site-url.com)
+- Live Site URL: [Live Preview](https://calculator-app-main-kappa.vercel.app/)
 
 ## My process
 
@@ -92,7 +92,7 @@ eval("alert('I hacked you')")
 
 ## Author
 
-- Website - [Arnold Nguechoung](https://www.your-site.com)
+- Website - [Arnold Nguechoung](https://github.com/escannord/)
 - Frontend Mentor - [@escannord](https://www.frontendmentor.io/profile/escannord)
 - Twitter - [@ANguechoung](https://x.com/ANguechoung)
 
