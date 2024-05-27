@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- displays site properly based on user's device -->
+
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./images/favicon-32x32.png"
+		/>
+
+		<title>Frontend Mentor | Calculator app</title>
+
+		<!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+		<style>
+      @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap');
+			* {
+				margin: 0;
+				box-sizing: border-box;
+        font-family: "League Spartan", sans-serif!important;
+        font-weight: 700!important;
+        font-style: normal;
+        transition: color 0.3s, background-color 1s;
+        
+			}
+      body.theme-1{
+        --body-bg:hsl(222, 26%, 31%);
+        --keypad-bg:hsl(223, 31%, 20%);
+        --keypad-color:hsl(221, 14%, 31%);
+        --header-color:hsl(0,0%,100%);
+        --key-keyboard-bg:hsl(30, 25%, 89%);
+        --key-keyboard-shadow:hsl(28, 16%, 65%);
+        --key-keyboard-color:hsl(221, 14%, 31%);
+        --key-keyboard-hover-bg:hsl(0,0%,100%);
+        --key-reset-del-bg:hsl(225, 21%, 49%);
+        --key-reset-del-shadow:hsl(224, 28%, 35%);
+        --key-reset-del-hover-bg:hsl(223.81,51.22%,75.88%);
+        --key-equal-toggle-bg:hsl(6, 63%, 50%);
+        --key-equal-shadow:hsl(6, 70%, 34%);
+        --key-equal-hover-bg:hsl(6.46,92.94%,66.67%);
+        --key-equal-del-reset-color:hsl(0, 0%, 100%);
+        --display-bg:hsl(224, 36%, 15%);
+        --display-color:hsl(0, 0%, 100%);
+      }
+      body.theme-2{
+        --body-bg:hsl(0, 0%, 90%);
+        --keypad-bg:hsl(0, 5%, 81%);
+        --keypad-color:hsl(60, 10%, 19%);
+        --header-color:hsl(60, 10%, 19%);
+        --key-keyboard-bg:hsl(45, 7%, 89%);
+        --key-keyboard-shadow:hsl(35, 11%, 61%);
+        --key-keyboard-color:hsl(60, 10%, 19%);
+        --key-keyboard-hover-bg:hsl(0,0%,100%);
+        --key-reset-del-bg:hsl(185, 42%, 37%);
+        --key-reset-del-shadow:hsl(185, 58%, 25%);
+        --key-reset-del-hover-bg:hsl(185.27,40.81%,56.27%);
+        --key-equal-toggle-bg:hsl(25, 98%, 40%);
+        --key-equal-shadow:hsl(25, 99%, 27%);
+        --key-equal-hover-bg:hsl(25.03,100%,60.98%);
+        --key-equal-del-reset-color:hsl(0, 0%, 100%);
+        --display-bg:hsl(0, 0%, 93%);
+        --display-color:hsl(60, 10%, 19%);
+      }
+
+      body.theme-3{
+        --body-bg:hsl(268, 75%, 9%);
+        --keypad-bg:hsl(268, 71%, 12%);
+        --keypad-color:hsl(52, 100%, 62%);
+        --header-color:hsl(52, 100%, 62%);
+        --key-keyboard-bg:hsl(268, 47%, 21%);
+        --key-keyboard-shadow:hsl(290, 70%, 36%);
+        --key-keyboard-color:hsl(52, 100%, 62%);
+        --key-keyboard-hover-bg:hsl(267.5,53.57%,43.92%);
+        --key-reset-del-bg:hsl(281, 89%, 26%);
+        --key-reset-del-shadow:hsl(285, 91%, 52%);
+        --key-reset-del-hover-bg:hsl(280.16,56.44%,44.12%);
+        --key-equal-toggle-bg:hsl(176, 100%, 44%);
+        --key-equal-shadow:hsl(177, 92%, 70%);
+        --key-equal-hover-bg:hsl(176.64,100%,79.02%);
+        --key-equal-del-reset-color:hsl(0, 0%, 100%);
+        --key-equal-color:hsl(198, 20%, 13%);
+        --display-bg:hsl(268, 71%, 12%);
+        --display-color:hsl(52, 100%, 62%);
+      }
+			body {
+       
+				display: grid;
+				place-items: center;
+				height: 100vh;
+        background-color: var(--body-bg);
+        
+			}
+    .calculator{
+      max-width: 450px;
+    }
+			.keys-body {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				grid-template-rows: repeat(4, auto) 1fr;
+				gap: 20px;
+        background-color: var(--keypad-bg);
+        padding: 20px;
+        border-radius: 10px;
+        color: var(--keypad-color);
+			}
+
+			.header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+        color: var(--header-color);
+        margin-bottom: 20px;
+			}
+      .button-keyboard{
+        background-color: var(--key-keyboard-bg);
+        box-shadow: 0 4px 0 var(--key-keyboard-shadow);
+        color: var(--key-keyboard-color);
+        border: none;
+        border-radius: 10px;
+        min-width: 5rem;
+        min-height: 3rem;
+        transition: all 0.2s;
+      }
+
+      .button-keyboard:hover{
+        background-color: var(--key-keyboard-hover-bg);
+      }
+
+      .button-keyboard,#display{
+        font-size: 32px;
+      }
+
+      .del,.reset{
+        background-color: var(--key-reset-del-bg);
+        box-shadow: 0 4px 0 var(--key-reset-del-shadow);
+      }
+
+      .del:hover,.reset:hover{
+        background-color:var(--key-reset-del-hover-bg);
+      }
+
+      .equal{
+        background-color: var(--key-equal-toggle-bg);
+        box-shadow: 0 4px 0 var(--key-equal-shadow);
+      }
+
+      .equal:hover{
+        background-color: var(--key-equal-hover-bg);
+      }
+
+      .equal,.del,.reset{
+        color: var(--key-equal-del-reset-color);
+      }
+
+      .theme-3 .equal{
+        color: var(--key-equal-color);
+      }
+
+      .button-keyboard:active{
+        transform: translateY(5px);
+        box-shadow: none;
+      }
+			.keys-body .button-keyboard:nth-last-child(-n + 2) {
+				grid-column: span 2;
+			}
+			#display {
+				width: 100%;
+        text-align: right;
+        background-color: var(--display-bg);
+        height: 6rem;
+        border: none;
+        outline: none;
+        margin-bottom: 1.5rem;
+        border-radius: 10px;
+        color: var(--display-color);
+        padding: 0 20px;
+        font-size: 50px;
+			}
+
+      .toggler{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 8rem;
+      }
+
+      .toggle-option{
+        display: none;
+      }
+
+      .toggle{
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        align-items: center;
+        width: 4.5rem;
+        height: 25px;
+        background-color: var(--keypad-bg);
+        border-radius: 20px;
+        padding: 5px;
+      }
+      .toggle .circle{
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background-color: var(--key-equal-toggle-bg);
+        cursor: pointer;
+        margin: 0;
+        transition: margin 0.8s;
+        
+      }
+
+      .toggle .circle:hover{
+        background-color: var(--key-equal-hover-bg);
+      }
+
+      .toggle .labels{
+        position: absolute;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        left: 0;
+        bottom: calc(100% + 5px);
+      }
+
+      
+
+      
+      @media only screen and (max-width: 500px) {
+        .calculator{
+          max-width: 90%;
+          margin:0 5%;
+        }
+        .button-keyboard{
+          min-width: 3rem;
+        }
+        .del,.reset{
+          font-size: 25px;
+        }
+      }
+      
+
+      @media only screen and (max-width: 375px) {
+        .calculator{
+          max-width: 320px!important;
+        }
+        .del,.reset{
+          font-size: 20px;
+        }
+        .button-keyboard{
+          min-width: 3rem;
+        }
+      }
+			.attribution {
+				font-size: 11px;
+				text-align: center;
+			}
+
+			.attribution a {
+				color: hsl(228, 45%, 44%);
+			}
+		</style>
+	</head>
+
+	<body class="theme-1">
+		<div>
+			<div class="calculator">
+				<div class="header">
+					<div class="title"><h1>calc</h1></div>
+					<div class="toggler">
+            <h5>THEME</h5>
+            <div class="toggle">
+              <div class="labels">
+                <label for="">1</label><label for="">2</label><label for="">3</label>
+              </div>
+              <div id="toggle-circle" class="circle "></div>
+            </div>
+						
+					</div>
+				</div>
+				<div class="displayer">
+					<input type="text" name="" value="0" id="display" disabled />
+				</div>
+				<div class="keyboard">
+					<div class="keys-body">
+						<button class="button-keyboard" onclick="appendChar('7')">7</button>
+						<button class="button-keyboard" onclick="appendChar('8')">8</button>
+						<button class="button-keyboard" onclick="appendChar('9')">9</button>
+						<button class="button-keyboard del" onclick="del()">DEL</button>
+						<button class="button-keyboard" onclick="appendChar('4')">4</button>
+						<button class="button-keyboard" onclick="appendChar('5')">5</button>
+						<button class="button-keyboard" onclick="appendChar('6')">6</button>
+						<button class="button-keyboard" onclick="appendChar('+')">+</button>
+						<button class="button-keyboard" onclick="appendChar('1')">1</button>
+						<button class="button-keyboard" onclick="appendChar('2')">2</button>
+						<button class="button-keyboard" onclick="appendChar('3')">3</button>
+						<button class="button-keyboard" onclick="appendChar('-')">-</button>
+						<button class="button-keyboard" onclick="appendChar('.')">.</button>
+						<button class="button-keyboard" onclick="appendChar('0')">0</button>
+						<button class="button-keyboard" onclick="appendChar('/')">/</button>
+						<button class="button-keyboard" onclick="appendChar('x')">x</button>
+						<button class="button-keyboard reset" onclick="resetDisplay()">RESET</button>
+						<button class="button-keyboard equal" onclick="calculate()">=</button>
+					</div>
+					<div class="key-footer"></div>
+				</div>
+			</div>
+
+			<div class="attribution">
+				Challenge by
+				<a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+					>Frontend Mentor</a
+				>. Coded by <a href="#">Arnold Nguechoung</a>.
+			</div>
+		</div>
+    <script>
+      var display=document.getElementById("display");
+      var options={reset:true}
+      function appendChar(char){
+        if( display.value=="0"&&options.reset){
+          display.value=""
+        }
+        display.value+=char;
+        options.reset=false
+      }
+
+      function formatNumberWithThousandSeparator(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+const allowedKeys = [
+        'x','+','-','/','.','=',
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        'Backspace', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Delete','CapsLock'
+    ];
+
+
+
+    display.addEventListener('keydown', function (event) {
+        if (!allowedKeys.includes(event.key)&&!event.shiftKey) {
+          alert('not allowed key')
+            event.preventDefault(); // Prevent the default action if the key is not allowed
+        }
+
+        if(event.key=='='||event.key=='Enter'){
+          calculate()
+          if(event.key=='='){
+            event.preventDefault()
+          }
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      event.stopPropagation()
+        if (!allowedKeys.includes(event.key)&&!event.shiftKey) {
+          alert('not allowed key')
+            return;
+        }
+
+
+
+        if(event.key=='='||event.key=='Enter'){
+          calculate()
+          if(event.key=='='){
+            event.preventDefault()
+          }
+        }
+        else if(['x','+','-','/','.','=',
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)){
+          appendChar(event.key)
+        }
+        else if(event.key=='Backspace'){
+          del()
+        }
+
+        
+    });
+
+
+      function calculate(){
+        var val=display.value.replaceAll('x','*');
+        try {
+          display.value=(eval(val))
+        } catch (error) {
+          display.value="FATAL ERROR";
+        }
+      }
+
+      function resetDisplay(){
+        display.value=0
+        options.reset=true
+      }
+
+      function del(){
+        if(["FATAL ERROR",'undefined','Infinity'].includes(display.value)){
+          display.value=0;
+          options.reset=true
+        }
+        display.value=display.value.slice(0,-1)
+        if(display.value==""){
+          display.value=0;
+          options.reset=true
+        }
+        
+      }
+
+      function toggle_theme(){
+        var body=document.getElementsByTagName('body')[0];
+        var toggle=/* document.getElementsByClassName('toggle').item(0) */this;
+        console.log(body.classList)
+        if(body.classList.contains('theme-1')){
+          body.classList.replace("theme-1","theme-2");
+          /* if(toggle.classList.contains('start'))toggle.classList.replace("start","center") */
+          toggle.style.margin="0 auto";
+        }
+        else if(body.classList.contains("theme-2")){
+          body.classList.replace("theme-2","theme-3");
+          /* if(toggle.classList.contains('center'))toggle.classList.replace("center","end") */
+          toggle.style.margin="0 0 0 auto";
+        }
+        else{
+          body.classList.replace("theme-3","theme-1");
+          /* if(toggle.classList.contains('end'))toggle.classList.replace("end","start") */
+          toggle.style.margin="0";
+        }
+      }
+      
+      var circle=document.getElementById("toggle-circle")
+
+      circle.addEventListener("click",toggle_theme)
+    </script>
+	</body>
+</html>
