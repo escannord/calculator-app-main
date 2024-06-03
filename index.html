@@ -315,7 +315,7 @@
 				Challenge by
 				<a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
 					>Frontend Mentor</a
-				>. Coded by <a href="https://github.com/escannord/">Arnold Nguechoung</a>.
+				>. Coded by <a href="#">Arnold Nguechoung</a>.
 			</div>
 		</div>
     <script>
@@ -334,7 +334,7 @@
 }
 
 const allowedKeys = [
-        'x','+','-','/','.','=',
+        'x','+','-','/','.','=','*',
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
         'Backspace', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Delete','CapsLock'
     ];
@@ -344,7 +344,7 @@ const allowedKeys = [
     display.addEventListener('keydown', function (event) {
         if (!allowedKeys.includes(event.key)&&!event.shiftKey) {
           alert('not allowed key')
-            event.preventDefault(); // Prevent the default action if the key is not allowed
+          event.preventDefault(); // Prevent the default action if the key is not allowed
         }
 
         if(event.key=='='||event.key=='Enter'){
@@ -366,13 +366,13 @@ const allowedKeys = [
 
         if(event.key=='='||event.key=='Enter'){
           calculate()
-          if(event.key=='='){
-            event.preventDefault()
-          }
+          event.preventDefault()
         }
-        else if(['x','+','-','/','.','=',
+        else if(['x','+','-','/','.','=','*',
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)){
-          appendChar(event.key)
+          if(event.key=='*') appendChar('x');
+          else appendChar(event.key);
+          
         }
         else if(event.key=='Backspace'){
           del()
